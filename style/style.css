@@ -1,0 +1,40 @@
+body{
+    font-family: 'Open Sans', sans-serif;
+    margin: auto;
+    padding: auto;
+}
+
+header {
+    padding: 10px;
+    color: white;
+    background-color: #000D8C;
+}
+
+footer {
+    margin-top: 64px;
+    color: white;
+    background-color: #000D8C;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/*Style halaman Result*/
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.summary{
+    margin: 32px;
+}
+
+.summary p{
+    padding-left: 24px;
+}
+
+mark{
+    background-color: #FFF173;
+    color: black;
+    font-weight: bold;
+}
+/*----------------------------------------------------------*/

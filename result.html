@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+    </header>
+
+
+    <main>
+      <div class="summary">
+          <h2>Results</h2>
+          <p><mark>You will break even at 80.000 units</mark></p>
+          <p>At expected unit sales, which is 15.000 units:</p>
+          <p>Total Revenue: $150.000</p>
+          <p>Total Cost: $115.000</p>
+          <p>Net Profit: $35.000</p>
+      </div>
+
+
+      <div class="tableview">
+          <table border="1">
+              <tr>                
+                  <th>Units</th>
+                  <th>Variabel Costs</th>
+                  <th>Total Costs</th>
+                  <th>Total Revenue</th>
+                  <th>Net Profit</th>
+              </tr>
+              <tr>
+                  <td>0</td>
+                  <td>$0</td>
+                  <td>$40.000</td>
+                  <td>$0</td>
+                  <td>$40.000</td>
+              </tr>
+          </table>
+      </div>
+
+
+      <div class="chart" style="width: 800px;">
+          <h2>Break-Even Analysis Chart</h2>
+          <canvas id="myChart"></canvas>
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>   
+          <script>
+              const labels = [
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+              ];
+            
+              const data = {
+                labels: labels,
+                datasets: [{
+                  label: 'My First dataset',
+                  backgroundColor: 'rgb(255, 99, 132)',
+                  borderColor: 'rgb(255, 99, 132)',
+                  data: [0, 10, 5, 2, 20, 30, 45],
+                }]
+              };
+            
+              const config = {
+                type: 'line',
+                data: data,
+                options: {}
+              };
+          </script>
+          <script>
+              const myChart = new Chart(
+                document.getElementById('myChart'),
+                config
+              );
+          </script>                    
+      </div>
+    </main>
+
+
+    <footer>
+      <div class="grid-container">
+        <div>
+          <p>Property of Kelompok 1: Milda Safrila O | M Rafi Rahmat A | Raja M Rifqi SH | Syafli Shovin</p>
+        </div>
+        <div style="text-align: right;">
+          <p>MSIB 2018 | Komputerisasi Akuntansi</p>
+        </div>
+    </footer>
+
+</body>
+</html>
