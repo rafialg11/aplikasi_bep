@@ -19,9 +19,10 @@ footer {
 }
 
 /*Style halaman Result*/
-.grid-container {
-    display: grid;
-    grid-template-columns: auto auto;
+mark{
+    background-color: #FFF173;
+    color: black;
+    font-weight: bold;
 }
 
 .summary{
@@ -32,9 +33,35 @@ footer {
     padding-left: 24px;
 }
 
-mark{
-    background-color: #FFF173;
-    color: black;
-    font-weight: bold;
+.tableview{
+    margin: 32px;
 }
+
+.tableview table{
+    overflow-x: auto;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+.tableview th, td {
+    text-align: left;
+    padding: 16px;
+}
+
+.tableview th {
+    background-color: #cbdcf8;
+}
+
+.tableview tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
 /*----------------------------------------------------------*/
