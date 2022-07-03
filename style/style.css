@@ -19,6 +19,29 @@ footer {
 }
 
 /*Style halaman Result*/
+.button {
+    font-family: 'Open Sans', sans-serif;
+    font-size: small;
+    border-radius: 12px;
+    background-color: white; /* Green */
+    border: 2px solid #000D8C;
+    color: black;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    margin-left: 32px;
+    margin-top: 32px;
+}
+  
+.button:hover {
+    background-color: #000D8C;
+    color: white;
+}
+
+
+
 mark{
     background-color: #FFF173;
     color: black;
@@ -57,6 +80,10 @@ mark{
 
 .tableview tr:nth-child(even) {
     background-color: #f2f2f2;
+}
+
+.chart {
+    margin: 32px;
 }
 
 .grid-container {
