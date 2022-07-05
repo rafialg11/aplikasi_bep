@@ -5,31 +5,68 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online BEP Calculator</title>
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/style_home.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-
+        <div class="blue_rect"></div>
+        <div class="title">
+            <div class="big-title">
+                <h1>Online</h1>
+                <h1><span>break-even point calculator</span></h1>
+            </div>
+            <div class="desc">
+                <h3>Finding the break-even point will answer when the business will make profit?</h3>
+                <h3>How many sales to sell so the business will make profit?</h3>
+            </div>
+        </div>
     </header>
     
     <main>
-        <form>
-            <label for="fixcost">Fixed Cost:</label><br>
-            <input type="text" id="fixcost" name="fixcost"><br>
-            <label for="varcost">Variable Cost per Unit:</label><br>
-            <input type="text" id="varcost" name="varcost"><br>
-            <label for="sellunit">Selling Price per Unit:</label><br>
-            <input type="text" id="sellunit" name="sellunit"><br>
-            <label for="expectsales">Expected Unit Sales:</label><br>
-            <input type="text" id="expectsales" name="expectsales"><br>
-        </form>
+        <div class="row">
+            <div class="column" id="info">
+                <div>
+                    <h2>What is Break-Even Point (BEP) analysis?</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, molestias nemo quibusdam, nisi voluptate animi eveniet soluta nulla, voluptas explicabo ratione dolor id quisquam. Quas, dolore. Explicabo aut labore iure.</p>
+                </div>
+                    <h2>What is a fixed cost?</h2>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Debitis natus necessitatibus perferendis voluptates, eaque nulla itaque porro rerum vel dicta, quas sunt ex odio nobis quo sint cumque beatae eius?</p>
+                <div>
+                    <h2>What is variable cost?</h2>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Debitis natus necessitatibus perferendis voluptates, eaque nulla itaque porro rerum vel dicta, quas sunt ex odio nobis quo sint cumque beatae eius?</p>
+                </div>
+            </div>  
+            <div class="column">
+                <div class="center">
+                    <h3>BEP CALCULATOR</h1>
+                        <form>
+                            <label for="fixcost">Fixed Cost:</label><br>
+                            <input type="text" id="fixcost" name="fixcost"><br>
+                            <label for="varcost">Variable Cost per Unit:</label><br>
+                            <input type="text" id="varcost" name="varcost"><br>
+                            <label for="sellunit">Selling Price per Unit:</label><br>
+                            <input type="text" id="sellunit" name="sellunit"><br>
+                            <label for="expectsales">Expected Unit Sales:</label><br>
+                            <input type="text" id="expectsales" name="expectsales"><br>
+                            <button>Calculate</button>
+                        </form>
+                </div>    
+            </div>
+        </div>
     </main>
     
     <footer>
-        
+        <div class="grid-container">
+            <div>
+              <p>Property of Kelompok 1: Milda Safrila O | M Rafi Rahmat A | Raja M Rifqi SH | Syafli Shovin</p>
+            </div>
+            <div style="text-align: right;">
+              <p>MSIB 2018 | Komputerisasi Akuntansi</p>
+            </div>
+        </div>
     </footer>
 </body>
 </html>
