@@ -46,13 +46,67 @@ header .desc{
     margin-left: auto;
     margin-right: auto;
     margin-top: 10%;
-    width: 60%;
+    width: 70%;
     border-radius: 30px;
     border: 1px solid#CFEBFF;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding: 24px;
     text-align: center;
 }
+
+.wrapper {
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid#CFEBFF;
+    width: 60%;
+    padding: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 30px;
+}
+
+.wrapper h3{
+    background: #CFEBFF;
+    color: #000D8C;
+    letter-spacing: 0.1rem;
+    padding: 1rem;
+    cursor: default;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.form-group label {
+    display: block;
+}
+
+.form-group input[type="text"]{
+    width: 95%;
+    padding: 10px 5px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    outline: 0;
+    transition: border 0.15s;
+    margin-top: 2px;
+    margin-bottom: 15px;
+    
+}
+
+.submit {
+    background: #000D8C;
+    color: white;
+    font-weight: bold;
+    margin-top: 1rem;
+    padding: 1rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.submit:hover {
+    background: #CFEBFF;
+    color: black;
+    border: 1px solid #000D8C;
+}
+
 
 footer {
     margin-top: 64px;
