@@ -44,13 +44,58 @@
           <canvas id="myChart"></canvas>
           <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>   
           <script>
-              const labels = [
-                'Units',
-                'Variable Costs',
-                'Total Costs',
-                'Total Revenue',
-                'Net Profit',                
-              ];
+              //codingan table
+              //cetak data di summary
+              document.getElementById("exp").innerHTML=localStorage.getItem("expectedus");
+              
+              //deklarasi variabel
+              FixedCosts = parseInt(localStorage.getItem("textvalue"))
+              VariableCosts = parseInt(localStorage.getItem("varcost"));
+              SellingPriceUnit = parseInt(localStorage.getItem("sellprice"));
+              ExpectedUnitSales = parseInt(localStorage.getItem("expectedus"));
+              TotalRow = ExpectedUnitSales/1000 + 1;
+              
+              // Create one dimensional array
+              var BEParray = new Array(TotalRow);
+              
+              // Loop to create 2D array using 1D array      
+              for (var i = 0; i < BEParray.length; i++) {
+                  BEParray[i] = [];
+              }
+              var h = 0;
+                
+              // Loop to initialize 2D array elements.
+              for (var UnitSale = 0; UnitSale <= TotalRow; UnitSale +=1000){
+                  for (var i = 0; i < TotalRow; i++) {
+                      BEParray[i][0] = UnitSale;
+                      BEParray[i][1] = UnitSale * VariableCosts;
+                      BEParray[i][2] = (UnitSale * VariableCosts) + FixedCosts;
+                      BEParray[i][3] = UnitSale * SellingPriceUnit;
+                      BEParray[i][4] = UnitSale * SellingPriceUnit - (UnitSale * VariableCosts + FixedCosts);
+                      UnitSale = UnitSale + parseInt(1000);
+                  }
+              }
+              
+              var array = BEParray,
+                table = document.getElementById("table");               
+                  
+              for(var i = 0; i < array.length; i++)
+              {
+                  // create a new row
+                  var newRow = table.insertRow(table.length);
+                  for(var j = 0; j < array[i].length; j++)
+                  {
+                      // create a new cell
+                      var cell = newRow.insertCell(j);
+                      
+                      // add value to the cell
+                      cell.innerHTML = array[i][j];
+                  }
+              }
+              
+              BEPtranpose = BEParray[0].map((_, colIndex) => BEParray.map(row => row[colIndex]));
+              //codingan chart
+              const labels = BEPtranpose[0];
             
               const data = {
                 labels: labels,
@@ -90,53 +135,7 @@
     
     
     <script>
-      //cetak data di summary
-      document.getElementById("exp").innerHTML=localStorage.getItem("expectedus");
       
-      //deklarasi variabel
-      FixedCosts = parseInt(localStorage.getItem("textvalue"))
-      VariableCosts = parseInt(localStorage.getItem("varcost"));
-      SellingPriceUnit = parseInt(localStorage.getItem("sellprice"));
-      ExpectedUnitSales = parseInt(localStorage.getItem("expectedus"));
-      TotalRow = ExpectedUnitSales/1000 + 1;
-      
-      // Create one dimensional array
-      var BEParray = new Array(TotalRow);
-      
-      // Loop to create 2D array using 1D array      
-      for (var i = 0; i < BEParray.length; i++) {
-          BEParray[i] = [];
-      }
-      var h = 0;
-        
-      // Loop to initialize 2D array elements.
-      for (var UnitSale = 0; UnitSale <= TotalRow; UnitSale +=1000){
-          for (var i = 0; i < TotalRow; i++) {
-              BEParray[i][0] = UnitSale;
-              BEParray[i][1] = UnitSale * VariableCosts;
-              BEParray[i][2] = (UnitSale * VariableCosts) + FixedCosts;
-              BEParray[i][3] = UnitSale * SellingPriceUnit;
-              BEParray[i][4] = UnitSale * SellingPriceUnit - (UnitSale * VariableCosts + FixedCosts);
-              UnitSale = UnitSale + parseInt(1000);
-          }
-      }
-      
-      var array = BEParray,
-                table = document.getElementById("table");               
-           
-           for(var i = 0; i < array.length; i++)
-           {
-               // create a new row
-               var newRow = table.insertRow(table.length);
-               for(var j = 0; j < array[i].length; j++)
-               {
-                   // create a new cell
-                   var cell = newRow.insertCell(j);
-                   
-                   // add value to the cell
-                   cell.innerHTML = array[i][j];
-               }
-           }
     </script>
 
 
