@@ -99,14 +99,34 @@
             
               const data = {
                 labels: labels,
-                datasets: [{
-                  label: 'My First dataset',
-                  backgroundColor: 'rgb(255, 99, 132)',
-                  borderColor: 'rgb(255, 99, 132)',
-                  data: [0, 10, 5, 2, 20, 30, 45],
-                }]
+                datasets: [
+                {
+                  label: 'Variable Costs',
+                  backgroundColor: '#1991D0',
+                  borderColor: '#1991D0',
+                  data: BEPtranpose[1],
+                },
+                {
+                  label: 'Total Costs',
+                  backgroundColor: '#F05B4F',
+                  borderColor: '#F05B4F',
+                  data: BEPtranpose[2],
+                },
+                {
+                  label: 'Total Revenue',
+                  backgroundColor: '#F5CF5B',
+                  borderColor: '#F5CF5B',
+                  data: BEPtranpose[3],
+                },
+                {
+                  label: 'Net Profit',
+                  backgroundColor: '#2ECC71',
+                  borderColor: '#2ECC71',
+                  data: BEPtranpose[4],
+                },
+              ]
               };
-            
+                      
               const config = {
                 type: 'line',
                 data: data,
