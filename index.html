@@ -9,6 +9,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+    <script>
+        function passvalues() {
+            localStorage.clear();
+            let fixed_cost = document.getElementById("fix_cost").value;
+            localStorage.setItem("textvalue", fixed_cost);
+            
+            let var_cost = document.getElementById("var_cpu").value;
+            localStorage.setItem("varcost", var_cost);
+            
+            let sell_price = document.getElementById("sell_ppu").value;
+            localStorage.setItem("sellprice", sell_price);
+            
+            let expected_unit_sales = document.getElementById("expected_unit").value;
+            localStorage.setItem("expectedus", expected_unit_sales);
+            
+            return false;
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -43,25 +62,25 @@
                 <div class="wrapper">
                     <h3>BEP CALCULATOR</h1>
                     
-                    <form action="">
+                    <form action="result.html">
                         <div class="form-group">
                             <label for="">Fixed Costs</label>
-                            <input type="text">
+                            <input type="text" id="fix_cost">
                         </div>
                         <div class="form-group">
                             <label for="">Variable Cost Per Unit</label>
-                            <input type="text">
+                            <input type="text" id="var_cpu">
                         </div>
                         <div class="form-group">
                             <label for="">Selling Price Per Unit</label>
-                            <input type="text">
+                            <input type="text" id="sell_ppu">
                         </div>
                         <div class="form-group">
                             <label for="">Expected Unit Sales</label>
-                            <input type="text">
+                            <input type="text" id="expected_unit">
                         </div>
                         <div class="form-group">
-                            <button class="submit">Calculate</button>
+                            <button class="submit" type="submit" onclick="passvalues();">Calculate</button>
                         </div>
                     </form>                    
                 </div>    
