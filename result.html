@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style/style_result.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
 </head>
 <body>
     <header>
@@ -17,8 +17,8 @@
     <main>
       <div class="summary">
           <h2>Results</h2>
-          <p><mark>You will break even at 80.000 units</mark></p>
-          <p>At expected unit sales, which is 15.000 units:</p>
+          <p><mark>You will break even at 80.000 units</mark></p>          
+          <p>At expected unit sales, which is <span id="exp"></span> units:</p>              
           <p>Total Revenue: $150.000</p>
           <p>Total Cost: $115.000</p>
           <p>Net Profit: $35.000</p>
@@ -26,7 +26,7 @@
 
 
       <div class="tableview">
-          <table>
+          <table id="tampiling">
             <tr>                
                 <th>Units</th>
                 <th>Variabel Costs</th>
@@ -108,6 +108,55 @@
           <p>MSIB 2018 | Komputerisasi Akuntansi</p>
         </div>
     </footer>
+    
+    
+    <script>
+      //cetak data di summary
+      document.getElementById("exp").innerHTML=localStorage.getItem("expectedus");
+      
+      //deklarasi variabel
+      FixedCosts = parseInt(localStorage.getItem("textvalue"))
+      VariableCosts = parseInt(localStorage.getItem("varcost"));
+      SellingPriceUnit = parseInt(localStorage.getItem("sellprice"));
+      ExpectedUnitSales = parseInt(localStorage.getItem("expectedus"));
+      TotalRow = ExpectedUnitSales/1000 + 1;
+      document.write("Fixed Cost", FixedCosts, "<br>")
+      document.write("VAr Cost", VariableCosts, "<br>")
+      document.write("Sell", SellingPriceUnit, "<br>")
+      document.write("Expec", ExpectedUnitSales, "<br><br>")
+      // Create one dimensional array
+      var BEParray = new Array(TotalRow);
+      
+      // Loop to create 2D array using 1D array
+      document.write("BEP Results <br>");
+      for (var i = 0; i < BEParray.length; i++) {
+          BEParray[i] = [];
+      }
+      var h = 0;
+        
+      // Loop to initialize 2D array elements.
+      for (var UnitSale = 0; UnitSale <= TotalRow; UnitSale +=1000){
+          for (var i = 0; i < TotalRow; i++) {
+              BEParray[i][0] = UnitSale;
+              BEParray[i][1] = UnitSale * VariableCosts;
+              BEParray[i][2] = (UnitSale * VariableCosts) + FixedCosts;
+              BEParray[i][3] = UnitSale * SellingPriceUnit;
+              BEParray[i][4] = UnitSale * SellingPriceUnit - (UnitSale * VariableCosts + FixedCosts);
+              UnitSale = UnitSale + parseInt(1000);
+          }
+      }
+      
+        
+      // Loop to display the elements of 2D array.
+      for (var i = 0; i < TotalRow; i++) {
+          for (var j = 0; j < 5; j++)
+          {
+              document.write(BEParray[i][j] + " ");
+          }
+          document.write("<br>");
+      }
+    </script>
+
 
 </body>
 </html>
