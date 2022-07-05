@@ -26,7 +26,7 @@
 
 
       <div class="tableview">
-          <table id="tampiling">
+          <table id="table">
             <tr>                
                 <th>Units</th>
                 <th>Variabel Costs</th>
@@ -34,28 +34,8 @@
                 <th>Total Revenue</th>
                 <th>Net Profit</th>
             </tr>
-            <tr>
-                <td>0</td>
-                <td>$0</td>
-                <td>$40.000</td>
-                <td>$0</td>
-                <td>$40.000</td>
-            </tr>
-            <tr>
-              <td>0</td>
-              <td>$0</td>
-              <td>$40.000</td>
-              <td>$0</td>
-              <td>$40.000</td>
-            </tr>
-            <tr>
-              <td>0</td>
-              <td>$0</td>
-              <td>$40.000</td>
-              <td>$0</td>
-              <td>$40.000</td>
-            </tr>
-          </table>
+            
+          </table>          
       </div>
 
 
@@ -65,12 +45,11 @@
           <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>   
           <script>
               const labels = [
-                'January',
-                'February',
-                'March',
-                'April',
-                'May',
-                'June',
+                'Units',
+                'Variable Costs',
+                'Total Costs',
+                'Total Revenue',
+                'Net Profit',                
               ];
             
               const data = {
@@ -120,15 +99,11 @@
       SellingPriceUnit = parseInt(localStorage.getItem("sellprice"));
       ExpectedUnitSales = parseInt(localStorage.getItem("expectedus"));
       TotalRow = ExpectedUnitSales/1000 + 1;
-      document.write("Fixed Cost", FixedCosts, "<br>")
-      document.write("VAr Cost", VariableCosts, "<br>")
-      document.write("Sell", SellingPriceUnit, "<br>")
-      document.write("Expec", ExpectedUnitSales, "<br><br>")
+      
       // Create one dimensional array
       var BEParray = new Array(TotalRow);
       
-      // Loop to create 2D array using 1D array
-      document.write("BEP Results <br>");
+      // Loop to create 2D array using 1D array      
       for (var i = 0; i < BEParray.length; i++) {
           BEParray[i] = [];
       }
@@ -146,15 +121,22 @@
           }
       }
       
-        
-      // Loop to display the elements of 2D array.
-      for (var i = 0; i < TotalRow; i++) {
-          for (var j = 0; j < 5; j++)
-          {
-              document.write(BEParray[i][j] + " ");
-          }
-          document.write("<br>");
-      }
+      var array = BEParray,
+                table = document.getElementById("table");               
+           
+           for(var i = 0; i < array.length; i++)
+           {
+               // create a new row
+               var newRow = table.insertRow(table.length);
+               for(var j = 0; j < array[i].length; j++)
+               {
+                   // create a new cell
+                   var cell = newRow.insertCell(j);
+                   
+                   // add value to the cell
+                   cell.innerHTML = array[i][j];
+               }
+           }
     </script>
 
 
