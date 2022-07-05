@@ -17,11 +17,11 @@
     <main>
       <div class="summary">
           <h2>Results</h2>
-          <p><mark>You will break even at 80.000 units</mark></p>          
+          <p><mark>You will break even at <span id="bep"></span> units</mark></p>          
           <p>At expected unit sales, which is <span id="exp"></span> units:</p>              
-          <p>Total Revenue: $150.000</p>
-          <p>Total Cost: $115.000</p>
-          <p>Net Profit: $35.000</p>
+          <p>Total Revenue: $<span id="tot_revenue"></span></p>
+          <p>Total Cost: $<span id="tot_cost"></span></p>
+          <p>Net Profit: $<span id="net"></span></p>
       </div>
 
 
@@ -62,8 +62,7 @@
               for (var i = 0; i < BEParray.length; i++) {
                   BEParray[i] = [];
               }
-              var h = 0;
-                
+              var h = 0;              
               // Loop to initialize 2D array elements.
               for (var UnitSale = 0; UnitSale <= TotalRow; UnitSale +=1000){
                   for (var i = 0; i < TotalRow; i++) {
@@ -71,8 +70,16 @@
                       BEParray[i][1] = UnitSale * VariableCosts;
                       BEParray[i][2] = (UnitSale * VariableCosts) + FixedCosts;
                       BEParray[i][3] = UnitSale * SellingPriceUnit;
-                      BEParray[i][4] = UnitSale * SellingPriceUnit - (UnitSale * VariableCosts + FixedCosts);
+                      BEParray[i][4] = UnitSale * SellingPriceUnit - (UnitSale * VariableCosts + FixedCosts);                      
                       UnitSale = UnitSale + parseInt(1000);
+                      if (BEParray[i][4]== 0 ) {
+                        document.getElementById("bep").innerHTML=BEParray[i][0];                        
+                      }
+                      if (BEParray[i][0]==ExpectedUnitSales)  {
+                        document.getElementById("tot_revenue").innerHTML=BEParray[i][2];
+                        document.getElementById("tot_cost").innerHTML=BEParray[i][3];
+                        document.getElementById("net").innerHTML=BEParray[i][4];
+                      }                  
                   }
               }
               
