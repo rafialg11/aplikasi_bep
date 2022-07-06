@@ -137,8 +137,24 @@
               const config = {
                 type: 'line',
                 data: data,
-                options: {}
-              };
+                options: {
+                  scales: {
+                  x: {
+                    display: true,
+                    title: {
+                      display: true,
+                      text: 'Units'
+                    }
+                  },
+                  y: {
+                    display: true,
+                    title: {
+                      display: true,
+                      text: 'Dolars $'
+                    }
+                  }
+                }            
+              }};
           </script>
           <script>
               const myChart = new Chart(
