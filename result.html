@@ -37,53 +37,83 @@
             
           </table>          
       </div>
-
-
-      <div class="chart" style="width: 800px;">
+      
+      <div class="chart" style="width: 1000px;">
           <h2>Break-Even Analysis Chart</h2>
           <canvas id="myChart"></canvas>
           <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>   
           <script>
-              //codingan table
+              
               //cetak data di summary
               document.getElementById("exp").innerHTML=localStorage.getItem("expectedus");
-              
+                            
               //deklarasi variabel
               FixedCosts = parseInt(localStorage.getItem("textvalue"))
               VariableCosts = parseInt(localStorage.getItem("varcost"));
               SellingPriceUnit = parseInt(localStorage.getItem("sellprice"));
               ExpectedUnitSales = parseInt(localStorage.getItem("expectedus"));
-              TotalRow = ExpectedUnitSales/1000 + 1;
               
-              // Create one dimensional array
-              var BEParray = new Array(TotalRow);
-              
-              // Loop to create 2D array using 1D array      
-              for (var i = 0; i < BEParray.length; i++) {
-                  BEParray[i] = [];
+              if ( ExpectedUnitSales > 0 && ExpectedUnitSales <= 99){
+                  Unit = "puluhan";
+              } else if (ExpectedUnitSales >= 100 && ExpectedUnitSales <= 999){
+                  Unit = "ratusan";
+              } else if (ExpectedUnitSales > 999){
+                  Unit = "ribuan";
               }
-              var h = 0;              
-              // Loop to initialize 2D array elements.
-              for (var UnitSale = 0; UnitSale <= TotalRow; UnitSale +=1000){
-                  for (var i = 0; i < TotalRow; i++) {
+                                 
+              let cmunit= SellingPriceUnit - VariableCosts;
+              let unitbep= FixedCosts/cmunit;
+              document.getElementById("bep").innerHTML= unitbep;
+              
+              switch (Unit) {
+                case "puluhan":
+                  createBEParrayPuluhan(FixedCosts, VariableCosts, SellingPriceUnit, ExpectedUnitSales);
+                  break;
+                case "ratusan":
+                  createBEParrayRatusan(FixedCosts, VariableCosts, SellingPriceUnit, ExpectedUnitSales);
+                  break;
+                case "ribuan":
+                  createBEParrayRibuan(FixedCosts, VariableCosts, SellingPriceUnit, ExpectedUnitSales);
+              }
+
+            function createBEParrayRibuan (FixedCosts, VariableCosts, SellingPriceUnit, ExpectedUnitSales){
+                if (ExpectedUnitSales % 1000 === 0) {
+                    TotalRow = ExpectedUnitSales/1000+1;
+                } else{
+                TotalRow = Math.ceil(ExpectedUnitSales/1000);
+                }                
+
+                // Create one dimensional array
+                var BEParray = new Array(TotalRow);
+                  
+                // Loop to create 2D array using 1D array                
+                for (var i = 0; i < BEParray.length; i++) {
+                    BEParray[i] = [];
+                }
+
+                for (var i = 0; i < TotalRow; i++){
+                  UnitSale = i * 1000;
+                  RestOfUnit = ExpectedUnitSales - (i*1000);
+                  if (RestOfUnit>=1000){
                       BEParray[i][0] = UnitSale;
                       BEParray[i][1] = UnitSale * VariableCosts;
                       BEParray[i][2] = (UnitSale * VariableCosts) + FixedCosts;
                       BEParray[i][3] = UnitSale * SellingPriceUnit;
-                      BEParray[i][4] = UnitSale * SellingPriceUnit - (UnitSale * VariableCosts + FixedCosts);                      
-                      UnitSale = UnitSale + parseInt(1000);
-                      if (BEParray[i][4]== 0 ) {
-                        document.getElementById("bep").innerHTML=BEParray[i][0];                        
-                      }
-                      if (BEParray[i][0]==ExpectedUnitSales)  {
-                        document.getElementById("tot_revenue").innerHTML=BEParray[i][2];
-                        document.getElementById("tot_cost").innerHTML=BEParray[i][3];
-                        document.getElementById("net").innerHTML=BEParray[i][4];
-                      }                  
+                      BEParray[i][4] = UnitSale * SellingPriceUnit - (UnitSale * VariableCosts + FixedCosts);}
+                      else {
+                      BEParray[i][0] = ExpectedUnitSales;
+                      BEParray[i][1] = ExpectedUnitSales * VariableCosts;
+                      BEParray[i][2] = (ExpectedUnitSales * VariableCosts) + FixedCosts;
+                      BEParray[i][3] = ExpectedUnitSales * SellingPriceUnit;
+                      BEParray[i][4] = ExpectedUnitSales * SellingPriceUnit - (ExpectedUnitSales * VariableCosts + FixedCosts);
                   }
-              }
-              
-              var array = BEParray,
+                  if (BEParray[i][0]==ExpectedUnitSales)  {
+                      document.getElementById("tot_revenue").innerHTML=BEParray[i][2];
+                      document.getElementById("tot_cost").innerHTML=BEParray[i][3];
+                      document.getElementById("net").innerHTML=BEParray[i][4];
+                  } 
+                }
+                var array = BEParray,
                 table = document.getElementById("table");               
                   
               for(var i = 0; i < array.length; i++)
@@ -155,14 +185,277 @@
                   }
                 }            
               }};
-          </script>
-          <script>
               const myChart = new Chart(
                 document.getElementById('myChart'),
                 config
               );
-          </script>                    
-      </div>
+            }
+
+            function createBEParrayRatusan (FixedCosts, VariableCosts, SellingPriceUnit, ExpectedUnitSales){
+                if (ExpectedUnitSales % 100 === 0) {
+                    TotalRow = ExpectedUnitSales/100+1;
+                } else{
+                TotalRow = Math.ceil(ExpectedUnitSales/100);
+                }                
+
+                // Create one dimensional array
+                var BEParray = new Array(TotalRow);
+                  
+                // Loop to create 2D array using 1D array                
+                for (var i = 0; i < BEParray.length; i++) {
+                    BEParray[i] = [];
+                }
+
+                for (var i = 0; i < TotalRow; i++){
+                    UnitSale = i * 100;
+                    RestOfUnit = ExpectedUnitSales - (i*100);
+                    if (RestOfUnit>=100){
+                        BEParray[i][0] = UnitSale;
+                        BEParray[i][1] = UnitSale * VariableCosts;
+                        BEParray[i][2] = (UnitSale * VariableCosts) + FixedCosts;
+                        BEParray[i][3] = UnitSale * SellingPriceUnit;
+                        BEParray[i][4] = UnitSale * SellingPriceUnit - (UnitSale * VariableCosts + FixedCosts);}
+                        else {
+                        BEParray[i][0] = ExpectedUnitSales;
+                        BEParray[i][1] = ExpectedUnitSales * VariableCosts;
+                        BEParray[i][2] = (ExpectedUnitSales * VariableCosts) + FixedCosts;
+                        BEParray[i][3] = ExpectedUnitSales * SellingPriceUnit;
+                        BEParray[i][4] = ExpectedUnitSales * SellingPriceUnit - (ExpectedUnitSales * VariableCosts + FixedCosts);}
+                        if (BEParray[i][0]==ExpectedUnitSales)  {
+                      document.getElementById("tot_revenue").innerHTML=BEParray[i][2];
+                      document.getElementById("tot_cost").innerHTML=BEParray[i][3];
+                      document.getElementById("net").innerHTML=BEParray[i][4];
+                    } 
+                }                    
+                    
+                var array = BEParray,
+                table = document.getElementById("table");               
+                  
+              for(var i = 0; i < array.length; i++)
+              {
+                  // create a new row
+                  var newRow = table.insertRow(table.length);
+                  for(var j = 0; j < array[i].length; j++)
+                  {
+                      // create a new cell
+                      var cell = newRow.insertCell(j);
+                      
+                      // add value to the cell
+                      cell.innerHTML = array[i][j];
+                  }
+              }
+              
+              BEPtranpose = BEParray[0].map((_, colIndex) => BEParray.map(row => row[colIndex]));
+              //codingan chart
+              const labels = BEPtranpose[0];
+            
+              const data = {
+                labels: labels,
+                datasets: [
+                {
+                  label: 'Variable Costs',
+                  backgroundColor: '#1991D0',
+                  borderColor: '#1991D0',
+                  data: BEPtranpose[1],
+                },
+                {
+                  label: 'Total Costs',
+                  backgroundColor: '#F05B4F',
+                  borderColor: '#F05B4F',
+                  data: BEPtranpose[2],
+                },
+                {
+                  label: 'Total Revenue',
+                  backgroundColor: '#F5CF5B',
+                  borderColor: '#F5CF5B',
+                  data: BEPtranpose[3],
+                },
+                {
+                  label: 'Net Profit',
+                  backgroundColor: '#2ECC71',
+                  borderColor: '#2ECC71',
+                  data: BEPtranpose[4],
+                },
+              ]
+              };
+                      
+              const config = {
+                type: 'line',
+                data: data,
+                options: {
+                  scales: {
+                  x: {
+                    display: true,
+                    title: {
+                      display: true,
+                      text: 'Units'
+                    }
+                  },
+                  y: {
+                    display: true,
+                    title: {
+                      display: true,
+                      text: 'Dolars $'
+                    }
+                  }
+                }            
+              }};
+              const myChart = new Chart(
+                document.getElementById('myChart'),
+                config
+              );
+            }
+
+            function createBEParrayPuluhan (FixedCosts, VariableCosts, SellingPriceUnit, ExpectedUnitSales){
+                if (ExpectedUnitSales % 10 === 0) {
+                    TotalRow = ExpectedUnitSales/10+1;
+                } else{
+                TotalRow = Math.ceil(ExpectedUnitSales/10);
+                }                
+
+                // Create one dimensional array
+                var BEParray = new Array(TotalRow);
+                  
+                // Loop to create 2D array using 1D array                
+                for (var i = 0; i < BEParray.length; i++) {
+                    BEParray[i] = [];
+                }
+
+                for (var i = 0; i < TotalRow; i++){
+                    UnitSale = i * 10;
+                    RestOfUnit = ExpectedUnitSales - (i*10);
+                    if (RestOfUnit>=10){
+                        BEParray[i][0] = UnitSale;
+                        BEParray[i][1] = UnitSale * VariableCosts;
+                        BEParray[i][2] = (UnitSale * VariableCosts) + FixedCosts;
+                        BEParray[i][3] = UnitSale * SellingPriceUnit;
+                        BEParray[i][4] = UnitSale * SellingPriceUnit - (UnitSale * VariableCosts + FixedCosts);}
+                        else {
+                        BEParray[i][0] = ExpectedUnitSales;
+                        BEParray[i][1] = ExpectedUnitSales * VariableCosts;
+                        BEParray[i][2] = (ExpectedUnitSales * VariableCosts) + FixedCosts;
+                        BEParray[i][3] = ExpectedUnitSales * SellingPriceUnit;
+                        BEParray[i][4] = ExpectedUnitSales * SellingPriceUnit - (ExpectedUnitSales * VariableCosts + FixedCosts);}
+                    
+                    if (BEParray[i][0]==ExpectedUnitSales)  {
+                      document.getElementById("tot_revenue").innerHTML=BEParray[i][2];
+                      document.getElementById("tot_cost").innerHTML=BEParray[i][3];
+                      document.getElementById("net").innerHTML=BEParray[i][4];
+                    }
+                } 
+                    var array = BEParray,
+                table = document.getElementById("table");               
+                  
+              for(var i = 0; i < array.length; i++)
+              {
+                  // create a new row
+                  var newRow = table.insertRow(table.length);
+                  for(var j = 0; j < array[i].length; j++)
+                  {
+                      // create a new cell
+                      var cell = newRow.insertCell(j);
+                      
+                      // add value to the cell
+                      cell.innerHTML = array[i][j];
+                  }
+              }
+              
+              BEPtranpose = BEParray[0].map((_, colIndex) => BEParray.map(row => row[colIndex]));
+              //codingan chart
+              const labels = BEPtranpose[0];
+            
+              const data = {
+                labels: labels,
+                datasets: [
+                {
+                  label: 'Variable Costs',
+                  backgroundColor: '#1991D0',
+                  borderColor: '#1991D0',
+                  data: BEPtranpose[1],
+                },
+                {
+                  label: 'Total Costs',
+                  backgroundColor: '#F05B4F',
+                  borderColor: '#F05B4F',
+                  data: BEPtranpose[2],
+                },
+                {
+                  label: 'Total Revenue',
+                  backgroundColor: '#F5CF5B',
+                  borderColor: '#F5CF5B',
+                  data: BEPtranpose[3],
+                },
+                {
+                  label: 'Net Profit',
+                  backgroundColor: '#2ECC71',
+                  borderColor: '#2ECC71',
+                  data: BEPtranpose[4],
+                },
+              ]
+              };
+                      
+              const config = {
+                type: 'line',
+                data: data,
+                options: {
+                  scales: {
+                  x: {
+                    display: true,
+                    title: {
+                      display: true,
+                      text: 'Units'
+                    }
+                  },
+                  y: {
+                    display: true,
+                    title: {
+                      display: true,
+                      text: 'Dolars $'
+                    }
+                  }
+                }            
+              }};
+              const myChart = new Chart(
+                document.getElementById('myChart'),
+                config
+              );
+            }
+                         
+               
+              /*// Create one dimensional array
+              var BEParray = new Array(TotalRow);
+              
+              // Loop to create 2D array using 1D array      
+              for (var i = 0; i < BEParray.length; i++) {
+                  BEParray[i] = [];
+              }
+              var h = 0;              
+              // Loop to initialize 2D array elements.
+              for (var UnitSale = 0; UnitSale <= TotalRow; UnitSale +=unitsalearray){
+                  for (var i = 0; i < TotalRow; i++) {
+                      BEParray[i][0] = UnitSale;
+                      BEParray[i][1] = UnitSale * VariableCosts;
+                      BEParray[i][2] = (UnitSale * VariableCosts) + FixedCosts;
+                      BEParray[i][3] = UnitSale * SellingPriceUnit;
+                      BEParray[i][4] = UnitSale * SellingPriceUnit - (UnitSale * VariableCosts + FixedCosts);                      
+                      UnitSale = UnitSale + parseInt(unitsalearray);                      
+                      if (BEParray[i][0]==ExpectedUnitSales)  {
+                        document.getElementById("tot_revenue").innerHTML=BEParray[i][2];
+                        document.getElementById("tot_cost").innerHTML=BEParray[i][3];
+                        document.getElementById("net").innerHTML=BEParray[i][4];
+                      }                  
+                  }
+              }
+              */
+              
+              
+          </script>
+          
+          <div style="width: 1000px;">
+            <h4>Note: </h4>
+            <p>The intersection between Total Cost and Total Revenue is where your BEP point. This intersection means the total cost and total revenue are equal, meaning the point where there is no loss or gain for your small business. You can see that when you reach this point of unit, your business is on BEP state.</p>                    
+          </div>
+      </div>           
     </main>
 
 
