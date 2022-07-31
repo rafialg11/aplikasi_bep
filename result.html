@@ -29,6 +29,8 @@
           <table id="table">
             <tr>                
                 <th>Units</th>
+                <th>Selling Price per Unit</th>
+                <th>Fixed Costs</th>
                 <th>Variabel Costs</th>
                 <th>Total Costs</th>
                 <th>Total Revenue</th>
@@ -96,16 +98,20 @@
                   RestOfUnit = ExpectedUnitSales - (i*1000);
                   if (RestOfUnit>=1000){
                       BEParray[i][0] = UnitSale;
-                      BEParray[i][1] = UnitSale * VariableCosts;
-                      BEParray[i][2] = (UnitSale * VariableCosts) + FixedCosts;
-                      BEParray[i][3] = UnitSale * SellingPriceUnit;
-                      BEParray[i][4] = UnitSale * SellingPriceUnit - (UnitSale * VariableCosts + FixedCosts);}
+                      BEParray[i][1] = SellingPriceUnit;
+                      BEParray[i][2] = FixedCosts;
+                      BEParray[i][3] = UnitSale * VariableCosts;
+                      BEParray[i][4] = (UnitSale * VariableCosts) + FixedCosts;
+                      BEParray[i][5] = UnitSale * SellingPriceUnit;
+                      BEParray[i][6] = UnitSale * SellingPriceUnit - (UnitSale * VariableCosts + FixedCosts);}
                       else {
-                      BEParray[i][0] = ExpectedUnitSales;
-                      BEParray[i][1] = ExpectedUnitSales * VariableCosts;
-                      BEParray[i][2] = (ExpectedUnitSales * VariableCosts) + FixedCosts;
-                      BEParray[i][3] = ExpectedUnitSales * SellingPriceUnit;
-                      BEParray[i][4] = ExpectedUnitSales * SellingPriceUnit - (ExpectedUnitSales * VariableCosts + FixedCosts);
+                      BEParray[i][0] = UnitSale;
+                      BEParray[i][1] = SellingPriceUnit;
+                      BEParray[i][2] = FixedCosts;
+                      BEParray[i][3] = UnitSale * VariableCosts;
+                      BEParray[i][4] = (UnitSale * VariableCosts) + FixedCosts;
+                      BEParray[i][5] = UnitSale * SellingPriceUnit;
+                      BEParray[i][6] = UnitSale * SellingPriceUnit - (UnitSale * VariableCosts + FixedCosts);
                   }
                   if (BEParray[i][0]==ExpectedUnitSales)  {
                       document.getElementById("tot_revenue").innerHTML=BEParray[i][2];
@@ -138,28 +144,34 @@
                 labels: labels,
                 datasets: [
                 {
+                  label: 'Fixed Costs',
+                  backgroundColor: '#31087B',
+                  borderColor: '#31087B',
+                  data: BEPtranpose[2],
+                },
+                {
                   label: 'Variable Costs',
                   backgroundColor: '#1991D0',
                   borderColor: '#1991D0',
-                  data: BEPtranpose[1],
+                  data: BEPtranpose[3],
                 },
                 {
                   label: 'Total Costs',
                   backgroundColor: '#F05B4F',
                   borderColor: '#F05B4F',
-                  data: BEPtranpose[2],
+                  data: BEPtranpose[4],
                 },
                 {
                   label: 'Total Revenue',
                   backgroundColor: '#F5CF5B',
                   borderColor: '#F5CF5B',
-                  data: BEPtranpose[3],
+                  data: BEPtranpose[5],
                 },
                 {
                   label: 'Net Profit',
                   backgroundColor: '#2ECC71',
                   borderColor: '#2ECC71',
-                  data: BEPtranpose[4],
+                  data: BEPtranpose[6],
                 },
               ]
               };
@@ -210,18 +222,23 @@
                     UnitSale = i * 100;
                     RestOfUnit = ExpectedUnitSales - (i*100);
                     if (RestOfUnit>=100){
-                        BEParray[i][0] = UnitSale;
-                        BEParray[i][1] = UnitSale * VariableCosts;
-                        BEParray[i][2] = (UnitSale * VariableCosts) + FixedCosts;
-                        BEParray[i][3] = UnitSale * SellingPriceUnit;
-                        BEParray[i][4] = UnitSale * SellingPriceUnit - (UnitSale * VariableCosts + FixedCosts);}
-                        else {
-                        BEParray[i][0] = ExpectedUnitSales;
-                        BEParray[i][1] = ExpectedUnitSales * VariableCosts;
-                        BEParray[i][2] = (ExpectedUnitSales * VariableCosts) + FixedCosts;
-                        BEParray[i][3] = ExpectedUnitSales * SellingPriceUnit;
-                        BEParray[i][4] = ExpectedUnitSales * SellingPriceUnit - (ExpectedUnitSales * VariableCosts + FixedCosts);}
-                        if (BEParray[i][0]==ExpectedUnitSales)  {
+                      BEParray[i][0] = UnitSale;
+                      BEParray[i][1] = SellingPriceUnit;
+                      BEParray[i][2] = FixedCosts;
+                      BEParray[i][3] = UnitSale * VariableCosts;
+                      BEParray[i][4] = (UnitSale * VariableCosts) + FixedCosts;
+                      BEParray[i][5] = UnitSale * SellingPriceUnit;
+                      BEParray[i][6] = UnitSale * SellingPriceUnit - (UnitSale * VariableCosts + FixedCosts);}
+                      else {
+                      BEParray[i][0] = UnitSale;
+                      BEParray[i][1] = SellingPriceUnit;
+                      BEParray[i][2] = FixedCosts;
+                      BEParray[i][3] = UnitSale * VariableCosts;
+                      BEParray[i][4] = (UnitSale * VariableCosts) + FixedCosts;
+                      BEParray[i][5] = UnitSale * SellingPriceUnit;
+                      BEParray[i][6] = UnitSale * SellingPriceUnit - (UnitSale * VariableCosts + FixedCosts);
+                    }
+                    if (BEParray[i][0]==ExpectedUnitSales)  {
                       document.getElementById("tot_revenue").innerHTML=BEParray[i][2];
                       document.getElementById("tot_cost").innerHTML=BEParray[i][3];
                       document.getElementById("net").innerHTML=BEParray[i][4];
@@ -253,28 +270,34 @@
                 labels: labels,
                 datasets: [
                 {
+                  label: 'Fixed Costs',
+                  backgroundColor: '#31087B',
+                  borderColor: '#31087B',
+                  data: BEPtranpose[2],
+                },
+                {
                   label: 'Variable Costs',
                   backgroundColor: '#1991D0',
                   borderColor: '#1991D0',
-                  data: BEPtranpose[1],
+                  data: BEPtranpose[3],
                 },
                 {
                   label: 'Total Costs',
                   backgroundColor: '#F05B4F',
                   borderColor: '#F05B4F',
-                  data: BEPtranpose[2],
+                  data: BEPtranpose[4],
                 },
                 {
                   label: 'Total Revenue',
                   backgroundColor: '#F5CF5B',
                   borderColor: '#F5CF5B',
-                  data: BEPtranpose[3],
+                  data: BEPtranpose[5],
                 },
                 {
                   label: 'Net Profit',
                   backgroundColor: '#2ECC71',
                   borderColor: '#2ECC71',
-                  data: BEPtranpose[4],
+                  data: BEPtranpose[6],
                 },
               ]
               };
@@ -325,23 +348,27 @@
                     UnitSale = i * 10;
                     RestOfUnit = ExpectedUnitSales - (i*10);
                     if (RestOfUnit>=10){
-                        BEParray[i][0] = UnitSale;
-                        BEParray[i][1] = UnitSale * VariableCosts;
-                        BEParray[i][2] = (UnitSale * VariableCosts) + FixedCosts;
-                        BEParray[i][3] = UnitSale * SellingPriceUnit;
-                        BEParray[i][4] = UnitSale * SellingPriceUnit - (UnitSale * VariableCosts + FixedCosts);}
-                        else {
-                        BEParray[i][0] = ExpectedUnitSales;
-                        BEParray[i][1] = ExpectedUnitSales * VariableCosts;
-                        BEParray[i][2] = (ExpectedUnitSales * VariableCosts) + FixedCosts;
-                        BEParray[i][3] = ExpectedUnitSales * SellingPriceUnit;
-                        BEParray[i][4] = ExpectedUnitSales * SellingPriceUnit - (ExpectedUnitSales * VariableCosts + FixedCosts);}
-                    
+                      BEParray[i][0] = UnitSale;
+                      BEParray[i][1] = SellingPriceUnit;
+                      BEParray[i][2] = FixedCosts;
+                      BEParray[i][3] = UnitSale * VariableCosts;
+                      BEParray[i][4] = (UnitSale * VariableCosts) + FixedCosts;
+                      BEParray[i][5] = UnitSale * SellingPriceUnit;
+                      BEParray[i][6] = UnitSale * SellingPriceUnit - (UnitSale * VariableCosts + FixedCosts);}
+                      else {
+                      BEParray[i][0] = UnitSale;
+                      BEParray[i][1] = SellingPriceUnit;
+                      BEParray[i][2] = FixedCosts;
+                      BEParray[i][3] = UnitSale * VariableCosts;
+                      BEParray[i][4] = (UnitSale * VariableCosts) + FixedCosts;
+                      BEParray[i][5] = UnitSale * SellingPriceUnit;
+                      BEParray[i][6] = UnitSale * SellingPriceUnit - (UnitSale * VariableCosts + FixedCosts);
+                    }
                     if (BEParray[i][0]==ExpectedUnitSales)  {
                       document.getElementById("tot_revenue").innerHTML=BEParray[i][2];
                       document.getElementById("tot_cost").innerHTML=BEParray[i][3];
                       document.getElementById("net").innerHTML=BEParray[i][4];
-                    }
+                    } 
                 } 
                     var array = BEParray,
                 table = document.getElementById("table");               
@@ -368,28 +395,34 @@
                 labels: labels,
                 datasets: [
                 {
+                  label: 'Fixed Costs',
+                  backgroundColor: '#31087B',
+                  borderColor: '#31087B',
+                  data: BEPtranpose[2],
+                },
+                {
                   label: 'Variable Costs',
                   backgroundColor: '#1991D0',
                   borderColor: '#1991D0',
-                  data: BEPtranpose[1],
+                  data: BEPtranpose[3],
                 },
                 {
                   label: 'Total Costs',
                   backgroundColor: '#F05B4F',
                   borderColor: '#F05B4F',
-                  data: BEPtranpose[2],
+                  data: BEPtranpose[4],
                 },
                 {
                   label: 'Total Revenue',
                   backgroundColor: '#F5CF5B',
                   borderColor: '#F5CF5B',
-                  data: BEPtranpose[3],
+                  data: BEPtranpose[5],
                 },
                 {
                   label: 'Net Profit',
                   backgroundColor: '#2ECC71',
                   borderColor: '#2ECC71',
-                  data: BEPtranpose[4],
+                  data: BEPtranpose[6],
                 },
               ]
               };
